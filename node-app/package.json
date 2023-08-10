@@ -1,0 +1,23 @@
+{
+  "name": "data-producer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "commonjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon ."
+  },
+  "author": "Rishabh Awatani",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "find-up": "^4.1.0",
+    "kafkajs": "^2.2.4",
+    "kijiji-scraper": "^6.3.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1",
+    "prettier": "^3.0.1"
+  }
+}
