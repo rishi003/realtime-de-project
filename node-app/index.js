@@ -1,14 +1,12 @@
-const kijiji = require('kijiji-scraper');
+import cron from 'node-cron';
+import { fingerprint } from './fingerprint/index.js';
+import { redisClient } from './redis/index.js';
+import { roomForRentScraper } from './scraper/index.js';
 
-kijiji
-  .search({
-    locationId: kijiji.locations.ONTARIO.TORONTO_GTA,
-    categoryId: kijiji.categories.REAL_ESTATE.FOR_RENT.STORAGE_AND_PARKING_FOR_RENT,
-    sortByName: 'priceAsc',
-    priceType: 'SPECIFIED_AMOUNT',
-  })
-  .then((res) => {
-    res.map((item) => {
-      console.log(item.toString());
+cron.schedule('*/10 * * * * *', () => {
+  roomForRentScraper().then((res) => {
+    res.map((ad) => {
+      redisClient.set(ad.id, ad.url);
     });
   });
+});
