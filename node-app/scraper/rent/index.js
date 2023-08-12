@@ -14,6 +14,12 @@ export const roomForRentScraper = () => {
     });
 };
 
+export const scrapeAd = (ad) => {
+  return kijiji.get(ad.id).then((res) => {
+    return transformAd(res);
+  });
+};
+
 const transformAd = (ad) => {
   return {
     id: ad.id,

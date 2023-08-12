@@ -71,6 +71,7 @@ services:
 
   cache:
     image: redis:6.2-alpine
+    container_name: cache
     restart: always
     ports:
       - "${REDIS_PORT}:6379"
