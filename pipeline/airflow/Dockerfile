@@ -1,4 +1,4 @@
-FROM apache/airflow:2.2.5-python3.8
+FROM apache/airflow:2.6.3-python3.9
 USER root
 
 # Install OpenJDK-11

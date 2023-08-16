@@ -1,17 +1,8 @@
 import requests
-import json
 from pyspark.sql import SparkSession
-from pyspark import SQLContext
 from pyspark.sql import functions as F
-from decouple import config
 
-aws_access_key = config('AWS_ACCESS_KEY')
-aws_secret_key = config('AWS_SECRET_KEY')
-
-spark = SparkSession \
-    .builder \
-    .appName("DataExtraction") \
-    .getOrCreate()
+spark = SparkSession.builder.appName("DataExtraction").getOrCreate()
 
 # hadoop_conf = spark.sparkContext._jsc.hadoopConfiguration()
 # hadoop_conf.set("fs.s3a.access.key", aws_access_key)
@@ -28,9 +19,11 @@ raw_json_dataframe = spark.read.json(RDD)
 raw_json_dataframe.printSchema()
 raw_json_dataframe.createOrReplaceTempView("Mutual_benefit")
 
-dataframe = raw_json_dataframe.withColumn("data", F.explode(F.col("data"))) \
-    .withColumn('meta', F.expr("meta")) \
+dataframe = (
+    raw_json_dataframe.withColumn("data", F.explode(F.col("data")))
+    .withColumn("meta", F.expr("meta"))
     .select("data.*", "meta.*")
+)
 
 dataframe.show(100, False)
 dataframe.toPandas().to_csv("dataframe.csv")
