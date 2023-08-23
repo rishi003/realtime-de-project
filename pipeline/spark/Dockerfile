@@ -6,7 +6,7 @@ RUN curl https://repo1.maven.org/maven2/com/amazonaws/aws-java-sdk-bundle/1.12.2
 RUN curl https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-aws/3.3.1/hadoop-aws-3.3.1.jar --output /opt/bitnami/spark/jars/hadoop-aws-3.3.1.jar
 RUN curl https://repo1.maven.org/maven2/net/java/dev/jets3t/jets3t/0.9.4/jets3t-0.9.4.jar --output /opt/bitnami/spark/jars/jets3t-0.9.4.jar
 
-COPY ./airflow/dags/spark_etl_script_docker.py /opt/bitnami/spark
+# COPY ./airflow/dags/ /opt/bitnami/spark
 
 COPY ./spark/requirements.txt /
 RUN pip install -r /requirements.txt
