@@ -31,7 +31,7 @@ def load_and_clean_ratings_data():
         for resource in resources:
             if '.csv' in resource['url']:
                 data = requests.request('GET', resource['url'])
-                client.put_object('raw', resource['name'], BytesIO(data.content), len(data.content))
+                client.put_object('raw', 'apartment_ratings' + '/' + resource['name'], BytesIO(data.content), len(data.content))
         
         return
 
@@ -46,28 +46,3 @@ def load_and_clean_ratings_data():
     download_task >> clean_task
 
 load_and_clean_ratings_data()
-
-# spark = SparkSession.builder.appName("ApartmentRatings").getOrCreate()
-
-# response = requests.get("https://api.mfapi.in/mf/118550")
-# data = response.text
-# sparkContext = spark.sparkContext
-# RDD = sparkContext.parallelize([data])
-# raw_json_dataframe = spark.read.json(RDD)
-
-# raw_json_dataframe.printSchema()
-# raw_json_dataframe.createOrReplaceTempView("Mutual_benefit")
-
-# dataframe = (
-#     raw_json_dataframe.withColumn("data", F.explode(F.col("data")))
-#     .withColumn("meta", F.expr("meta"))
-#     .select("data.*", "meta.*")
-# )
-
-# dataframe.show(100, False)
-# dataframe.toPandas().to_csv("dataframe.csv")
-
-# NOTE This line requires Java 8 instead of Java 11 work it to work on Airflow
-# We are saving locally for now.
-# dataframe.write.parquet('s3a://sparkjobresult/output',mode='overwrite')
-# dataframe.write.format('csv').option('header','true').save('s3a://sparkjobresult/output',mode='overwrite')
