@@ -4,7 +4,7 @@ from pyspark.sql import SparkSession
 import pyspark.sql.functions as F
 import pyspark.sql.types as T
 
-logger = logging.getLogger("MinioSparkJob")
+logger = logging.getLogger("ApartmentRatingsJob")
 
 spark = SparkSession.builder.appName("ApartmentRatings").getOrCreate()
 
