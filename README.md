@@ -1,8 +1,8 @@
 # Real time Kijiji Data Pipeline
 
-```
+``
 The motivation behind this project was to develop an in depth understanding of different big data open source technologies and how they can be utilized to deploy a scalable data solution without a cloud vendor lock-in.
-```
+``
 
 `Objective`: The task is to create a data processing pipeline which retrives Apartment Ratings data from [Open Data - City of Toronto](https://open.toronto.ca/dataset/apartment-building-evaluation/) and realtime apartment ratings data from [Kijiji](https://www.kijiji.com/). After that, the data will be processed and using **Spark Batch** and **Streaming** jobs and the resultant processed data is then stored in a AWS S3 compatible Minio Bucket. Entire pipeline is deployed using **Airflow** and **Docker**.
 
